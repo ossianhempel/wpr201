@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Examinationsuppgift">
+  <meta name="author" content="Ossian Hempel">
+  <link rel="stylesheet" href="../style.css">
+  <title>Ossian Hempel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<!-- Samma struktur som startsidan, därmed ej kommenterad -->
+<body>
+  <div class="wrapper" id="wrapper">
+    <header id="header">
+      <div class="header-content">
+        <div id="logo">
+          <h1>Ossian Hempel Webbdesign</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">STARTSIDA</a></li>
+            <li><a href="../pages/rapport.html">RAPPORT</a></li>
+            <li><a href="../pages/showcase.html">SHOWCASE</a></li>
+            <li><a href="../pages/contact.html">KONTAKT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-report">
+      <h1>Processanalys</h1>
+      
+      <h2>Övergripande</h2>
+      <p>I det här projektet har jag valt att använda CSS-variabler för att lagra de vanligaste färgerna. Detta är ett effektivt sätt att hantera färger eftersom det gör det enkelt att uppdatera dem genom hela dokumentet om det behövs (Wilkins, 2022). Det underlättar även att göra färganvändningen på hemsidan konsekvent eftersom färgerna enkelt återanvänds.</p>
+      <p>Box-modellen appliceras på alla element i dokumentet för att säkerställa att bredd och höjd inkluderar padding och border. Detta leder till bättre kontroll över elementens storlek och placering på sidan. Att applicera box-modellen på alla element ger en enhetlig och förutsägbar layout där padding och border ingår i beräkningen av elementens totala storlek (Coyier, 2021a). Alternativt kan man använda den traditionella box-modellen, men detta kan leda till svårigheter när man anpassar layouten för olika skärmstorlekar och ger mindre kontroll över elementens storlek och placering.</p>
+      <p>Jag utgick från de mock-ups som gavs i uppgiften och använde en desktop-first-strategi för att den hade mest detaljer och tanken var då att det skulle bli lättare att skala ner och anpassa sidan för mindre skärmar senare efter att ha skapat en mer komplex layout för desktop. Ett alternativ är en mobile-first-strategi, men detta kan göra det svårare att skapa en rik och detaljerad desktop-layout från en enklare mobilversion. Framförallt då jag visste om hur designen skulle se ut baserat på mockupsen (Johnson, 2019). </p>
+      <p>Sidan delas in i tre primära sektioner med hjälp av CSS Grid. CSS Grid används för att skapa sidans grundläggande layout, vilket ger en hög grad av flexibilitet och kontroll över elementens placering och storlek (House, 2023). Ett alternativ till CSS Grid är Flexbox, men CSS Grid är bättre på att skapa layouts för hela sidor, både praktiskt och prestandamässigt (Rendle, 2017). Jag använde istället flexbox för att positionera elementen inom den större layouten just för att det är smidigt och flexibelt, men CSS Grid kan vara ett bättre alternativ för att skapa den övergripande layouten då det ger mer kontroll.</p>
+      
+      <h2>Wrapper</h2>
+      <p>Jag valde att använda en wrapper för att centrera och innesluta innehållet på sidorna. Wrappern skapades genom ett `div` element som jag gav id “wrapper” (Kosev, 2017). Man kan lika gärna använda en class istället men eftersom jag bara använder en wrapper i dokumentet passade det med id. Ett alternativt sätt är att använda ett container element men det är mest en smaksak och Kosev (2017) rekommenderar att använda den metod jag använde. Jag applicerade en max-width på wrapper för att undvika att innehållet sträcker sig utöver kanterna och man undviker på så vis en horisontell scrollbar när webbläsarfönstret är väldigt smalt (Kosev, 2017). </p>
+      
+      <h2>Header</h2>
+      <p>Headern fick en bakgrundsfärg och bakgrundsbild som täcker hela headern, enligt instruktionerna. Bakgrundsbilden stylas genom CSS och mer specifikt “background-size: cover” vilket gör att bilden skalar och anpassar sig efter headerns dimensioner (Coyier, 2022). I headern finns även logotyp, en navigationsmeny och en kortare text. Flexbox används för att placera innehållet vertikalt och centrera det. Flexbox gör headern responsiv så att den anpassar sig för olika skärmstorlekar och orientationer, exempelvis på mobila enheter (Niederst Robbins, 2018). Ett alternativ är att använda CSS Grid eller absolut positionering, men Flexbox erbjuder en mer flexibel och lättanvänd lösning för centrerade och responsiva layouter i den här situationen (Coyier, 2021b). Självbeskrivningen centrerar innehållet med en maxbredd och en bakgrundsfärg med viss transparens för att göra texten lättare att läsa. Jag använder semantiska HTML element såsom `header`, `nav` och `ul` för att göra hemsidan mer tillgänglig. </p>
+
+      <h2>Main</h2>
+      <p>Jag skapade “huvudsektionen” genom en kombination av Flexbox och individuella innehållsboxar för att uppnå den önskade layouten. Detta resulterade i en flexibel och anpassningsbar layout som fungerar i flera skärmstorlekar.I HTML skapade jag ett `main` element som innehåller en `div` med klassen “contentboxes” som innehåller tre individuella `div`-element med klasserna “contentbox”. Varje contentbox innehåller en bild och en text där texten är omsluten genom ytterligare en `div` med klass “image-circle” för att skapa den cirkulära ramen åt bilderna. Den här strukturen hjälper mig separera innehållet och hålla koden tydlig. I CSS använde jag Flexbox för `main` och innehållboxarnas kontainer för att enkelt kunna positionera och hålla isär innehållsboxarna utan att behöva använda manuella uträkningar och justeringar. Dessutom blir det då responsivt för olika skärmstorlekar.</p>
+      <p>Jag skapade de cirkulära bilderna genom en kombination av ett cirkulärt element (class=”image-circle”) och de faktiska bildelementen inom de cirkulära elementen. Jag gav dem en fast höjd och bredd, samt en border-radius för att göra de cirkulära. `Overflow: hidden” användes sedan för att dölja den del av bilderna som var större en det cirkulära elementen. På så sätt visades bara den del av bilden som fick plats i cirkeln. För att positionera bilderna enligt mockupen (centrera den mittersta bilden och höger-/vänsterjustera bilderna på sidorna på deras innehållsboxar) använde jag float. Det hade även gått att använda Flexbox här men float blev lättast då jag bara behövde applicera önskad float på varje bild utan att behöva justera något runtomkring. För att skapa överlappning mellan bilderna och ovan element, som på mockupen, använde jag negativ margin. Eftersom margin vanligtvis skapar utrymme mellan två element gör negativ margin att de överlappar istället (Imbong, 2009).</p>
+      
+      <h2>Footer</h2>
+      <p>Footern delades upp i tre sektioner som innehåller kontaktinformation och adress. Varje sektion är en `div` med ett `h3` element för rubriken och `p` som innehåller informationen. Man hade även kunnat arbeta med listor här men eftersom två av tre element bara innehåller en paragraf under rubriken gick det snabbare att använda `p` och slutresultatet blev detsamma. I CSS:en används återigen Flexbox just för att det underlättar positioneringen av elementen och samtidigt gör dem responsiva utan ytterligare åtgärd. Likt headern, har footern en bakgrundsbild som ställdes in med “bottom” för att matcha headern. De använder en likadan bild men genom att positionera så footern endast visar botten av bilden medan headern visar en del högre upp på bilden skapas en sammanhållning då bilderna “matchar”. Inom de individuella `div`-elementen i footern använder jag `flex-direction: column` så att titeln och detaljerna positioneras vertikalt. Paragraf-elementen inom footern har en margin satt till 0 för att ta bort automatiskt spacing och ger på så sätt mer kontroll över layouten. </p>
+      
+      <h2>Media Queries</h2>
+        <h3>Surfplatta</h3>
+        <p>Den första media queryn är till för surfplattor och gäller för bredd mellan 768px och 1024px. 768px är en standardbredd för just surfplattor (Mutua, 2022). För denna storlek sätter jag `.contentboxes` till `flex-wrap: wrap` så att boxarna kan flyttas ned till “nästa rad” om det krävs för att få plats (Fitzgerald, 2021). Jag satte även en responsiv bredd på boxarna till 50% av det tillgängliga utrymmet minus 1.5 viewport-bredd. Detta resulterar i en lagom storlek som anpassar sig efter sidans bredd. Jag ger även `margin-bottom` en gräns på minimalt 100px vilket hjälper till att hålla ett rimligt mellanrum när boxarna flyttas ner. `float`-värdena sätts till `none` för att låta boxarna flytta på sig utifrån tillgängligt utrymme.</p>
+        
+        <h3>Mobil</h3>
+        <p>Eftersom jag har en storlek för tablet lät jag alla storlekar under 768px ha den mobila designen, vilket alltså får en maxbredd på 767px (Mutua, 2022). Här har jag ändrat `.header-content`’s `flex-direction: column` så att boxarna positioneras vertikalt ovanför varandra istället för horisontellt. Detta då flera boxar inte får plats på den mobila storleken. Logotypens storlek breddas och centreras för att matcha den mobila layouten bättre. För de cirkulära bilderna tas float bort och ordningen på boxarna sätts manuellt genom `order` för att positionera den mittersta boxen längst upp på den mobila sidan enligt instruktionerna (Monus, 2021). Utan den här justeringen skulle den vänstra boxen visas längst upp på den mobila versionen. </p>
+        
+        <h3>Print</h3>
+        <p>Den tredje och sista media queryn justerar vad som visas när man skriver ut sidan. Jag döljer bakgrundsbilden för `header` och `footer` då de större bilderna skulle döljas enligt uppgiftsinstruktionerna. Jag döljer även menyn eftersom man ändå inte kan interagera med den utskriva sidan så det är onödigt att inkludera interaktiv element. De mindre bilderna som stannar kvar vid utskrift är satta till gråskala för att ta bort färger och på så sätt spara bläck och kompabilitet. I `footer` använder jag pseudo-elementet `::after` för att addera en copyright-text efter de andra elementen i footern. </p>
+
+      <h2>Referenslista</h2>
+      <ul>
+        <li>Coyier, C., 2021a. The CSS Box Model. [online] CSS-Tricks. Available at: https://css-tricks.com/the-css-box-model [Accessed 26 March 2023].</li>
+        <li>Coyier, C., 2021b. The Thought Process Behind a Flexbox Layout. [online] CSS-Tricks. Available at: https://css-tricks.com/the-thought-process-behind-a-flexbox-layout [Accessed 26 March 2023].</li>
+        <li>Coyier, C., 2022. Perfect Full Page Background Image. [online] CSS-Tricks. Available at: https://css-tricks.com/perfect-full-page-background-image [Accessed 26 March 2023].</li>
+        <li>Fitzgerald, A., 2021. How to use Flexbox to create a modern CSS card design layout. [online] Layout | Creative content for designers, developers, & marketers. Available at: https://getflywheel.com/layout/flexbox-create-modern-card-design-layout [Accessed 26 March 2023].</li>
+        <li>House, C., 2023. A Complete Guide to CSS Grid. [online] CSS-Tricks. Available at: https://css-tricks.com/snippets/css/complete-guide-grid [Accessed 26 March 2023].</li>
+        <li>Imbong, J., 2009. The Definitive Guide to Using Negative Margins. [online] Smashing Magazine. Available at: https://www.smashingmagazine.com/2009/07/the-definitive-guide-to-using-negative-margins [Accessed 26 March 2023].</li>
+        <li>Johnson, J., 2019. Mobile First Design: Why It’s Great and Why It Sucks. Available at: https://designshack.net/articles/css/mobilefirst [Accessed 26 March 2023].</li>
+        <li>Kosev, K., 2017. The Best Way to Implement a ‘Wrapper’ in CSS. [online] CSS-Tricks. Available at: https://css-tricks.com/best-way-implement-wrapper-css [Accessed 26 March 2023].</li>
+        <li>Monus, A., 2021. A Comprehensive Guide to Flexbox Ordering & Reordering. [online] Web Design Envato Tuts+. Available at: https://webdesign.tutsplus.com/tutorials/a-comprehensive-guide-to-flexbox-ordering-reordering--cms-31564 [Accessed 26 March 2023].</li>
+        <li>Mutua, P., 2022. How to target desktop, tablet and mobile using Media Query ? [online] DEV Community. Available at: https://dev.to/pmutua/how-to-target-desktop-tablet-and-mobile-using-media-query--15n7 [Accessed 26 March 2023].</li>
+        <li>Niederst Robbins, J., 2018. Learning Web Design: a beginner’s guide to HTML, CSS, Javascript, and Web Graphics. Fifth Edition ed. Beijing ; Sebastopol, CA: O’Reilly.</li>
+        <li>Rendle, R., 2017. Does CSS Grid Replace Flexbox? [online] CSS-Tricks. Available at: https://css-tricks.com/css-grid-replace-flexbox [Accessed 26 March 2023].</li>
+        <li>Wilkins, J., 2022. CSS Variables Definition – What are CSS Vars and How to Use Them? [online] freeCodeCamp.org. Available at: https://www.freecodecamp.org/news/what-are-css-variables-and-how-to-use-them [Accessed 26 March 2023].</li>
+      </ul>
+
+    </main>
+    <footer>
+      <div>
+        <h3>Adress</h3>
+        <p>Mejselvägen 37</p>
+        <p>126 38 Hägersten</p>
+      </div>
+      <div>
+        <h3>Telefon</h3>
+        <p>0708-436 543</p>
+      </div>
+      <div>
+        <h3>E-post</h3>
+        <p>hemposse@hotmail.com</p>
+      </div>
+    </footer>
+  </div>
+  
+</body>
+</html>

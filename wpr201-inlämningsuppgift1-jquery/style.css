@@ -1,0 +1,326 @@
+:root {
+  /* ----- Sparar de vanligaste färgerna som variabler ----- */
+  --background-color-blue: rgb(145, 180, 212);
+  --background-color-grey: #eee;
+  --white-text: white;
+  --black-text: rgb(35, 35, 35);
+  --transparent-background: rgba(20, 18, 18, 0.495);
+}
+
+* {
+  /* Applicera box modellen till alla element i dokumentet */
+  box-sizing: border-box;
+}
+
+
+/* ----- Grundstilen (desktop-first) ----- */
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+
+/* Grid wrapper för hela sidan */
+#wrapper {
+  /* Använder grid för att dela upp sidan i tre primära sektioner */
+  display: grid;
+  grid-template-rows: 1.5fr 3fr 0.5fr;
+  max-width: 100%;
+  /* Centrerar horisontellt */
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+}
+
+/* Lägger till padding i kanterna för hela layouten */
+header, main, footer {
+  padding-left: 8vw;
+  padding-right: 8vw;
+}
+
+/* Header sektion */
+header {
+  /* Ta en rad i gridet */
+  grid-row: 1 / 2;
+  background-color: var(--background-color-blue);
+  /* Applicera flexbox med en vertikal orientering och centrera */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Bakgrundsbild som täcker hela headern */
+  background-image: url('./images/header_img.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Innehåll inuti header sektionen */
+.header-content {
+  /* Gör innehållet centrerat horisontellt och med mellanrum mellan innehållselementen */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo och logotext */
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo h1 {
+  font-size: 30px;
+  text-align: center;
+  color: var(--white-text);
+  font-weight: bold;
+}
+
+/* Hover effekt för länkar */
+/* Behövde inkludera #logo i selectorn eftersom ID har högst specificitet */
+#logo h1 a:hover, a:hover {
+  color: rgb(141, 141, 141);
+}
+
+/* Navigationsmeny */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--white-text);
+}
+
+/* "Pitch"/självbeskrivning */
+#self-description {
+  max-width: 50%;
+  margin-top: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: min(100px);
+  color: var(--white-text);
+  background-color: var(--transparent-background);
+  border-radius: 30px;
+  padding: 10px;
+  line-height: 150%;
+}
+
+/* Huvudsektion */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  grid-row: 2 / 3;
+  background-color: var(--background-color-grey);
+  border: 1px solid grey;
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+}
+
+/* Innehållssektioner */
+.contentboxes {
+  display: flex;
+  gap: 1.5vw;
+}
+
+.contentbox {
+  background-color: white;
+  color: var(--black-text);
+  border: 1px solid #cbc8c8f3;
+  line-height: 150%;
+}
+
+.contentbox-text {
+  padding: 100px 5px 5px 5px;
+}
+
+/* Ändrar textstorleken på första paragrafen i varje box */
+.contentbox-text p:first-child {
+  font-size: 20px;
+}
+
+/* Cirkulära bilder kopplade till boxar */
+.image-circle {
+  height: 200px;
+  width: 200px;
+  border: 10px solid white;
+  background-color: darkgray;
+  border-radius: 200px;
+  /* Placera bilderna "längst fram" på skärmen */
+  z-index: 1;
+  /* Negativ margin för att skapa overlap mellan element */
+  margin-top: -110px;
+  margin-bottom: -100px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Positionerar bilderna */
+#circle-image-left {
+  float: left;
+}
+
+#circle-image-right {
+  float: right;
+}
+
+.image-circle img {
+  height: 200px;
+  width: 200px; 
+}
+
+/* Footer */
+footer {
+  display: flex;
+  grid-row: 3 / 4;
+  background-color: var(--background-color);
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 120px;
+  background-image: url('./images/header_img.jpg');
+  background-size: cover;
+  background-position: bottom;
+  color: var(--white-text);
+}
+
+footer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+footer div p {
+  margin: 0;
+}
+
+footer div h3 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
+/* ----- Stilar för surfplattor ------ */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .contentboxes {
+    flex-wrap: wrap;
+  }
+
+  .contentbox {
+    /* Sätter initiella bredden på boxarna till 50% av bredden - 1.5 x fönstrets bredd (responsivt) */
+    flex: 0 0 calc(50% - 1.5vw);
+    margin-bottom: min(100px);
+  }
+
+  /* Återställer floating av circle-images */
+  #circle-image-left, #circle-image-middle, #circle-image-right {
+    float: none;
+  }
+}
+
+/* ----- Stilar för mobiler ----- */
+@media (max-width: 767px) {
+
+  /* Ändrar flex-direction för att centrera logo och länkar */
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Loggan blir mer vertikal */
+  #logo {
+    width: 50vw;
+  }
+
+  /* Låter ta upp hela bredden */
+  #self-description {
+    max-width: 100%;
+  }
+  
+  main {
+    padding-bottom: 5vh;
+  }
+  
+  /* Minskar margin top för mobila sidan för att passa bättre */
+  .image-circle {
+    margin-top: -180px;
+  }
+  
+  #circle-image-left, #circle-image-middle, #circle-image-right {
+    /* Återställer floating av circle-bilderna */
+    float: none;
+  }
+  
+  /* Alignar contentboxes vertikalt istället för horisontellt */
+  .contentboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 200px;
+  }
+  
+  /* Ändrar ordningen på boxarna så den mittersta visas först i mobila versionen */
+  #contentbox-left {
+    order: 2;
+  }
+  #contentbox-middle {
+    order: 1;
+  }
+  #contentbox-right {
+    order: 3
+  }
+}
+
+/* ----- Stil vid utskrift ----- */
+@media print {
+    /* Gömmer bakgrundsbilden för headern och footern */
+    header, footer {
+      background-image: none;
+    }
+
+    /* Gömmer menyn då man inte kan navigera i utskrift */
+    #meny {
+      display: none;
+    }
+
+    img {
+      /* Tar bort färgen på bilder vid utskrift */
+      filter: grayscale(100%);
+    }
+
+     /* Adderar copyright-text i footern efter övriga element */
+    footer::after {
+      content: "Copyright © Ossian Hempel";
+    }
+    
+}
+
+/* Stilar för rapporten */
+#main-report h1 {
+  text-align: center;
+}
+
+#main-report p {
+  line-height: 150%;
+  margin: 0;
+}
+
+#main-report ul {
+  list-style: none;
+}
+
+#main-report li {
+  margin: 20px;
+}
+
+/* Placeholder för övriga sidor */
+#placeholder {
+  text-align: center;
+  font-size: 50px;
+}
