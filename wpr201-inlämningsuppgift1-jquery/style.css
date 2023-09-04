@@ -351,6 +351,10 @@ footer div h3 {
   border: none;
 }
 
+/* Centrerar extratext i element som försvinner vid klick */
+.click-to-remove {
+  text-align: center;
+}
 
 
 
