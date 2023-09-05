@@ -108,6 +108,9 @@ nav ul a {
   border-radius: 30px;
   padding: 10px;
   line-height: 150%;
+
+  position: relative;
+  left: -1000px;
 }
 
 /* Huvudsektion */
@@ -142,10 +145,6 @@ main {
 /* Ändrar textstorleken på första paragrafen i varje box */
 .contentbox-text p:first-child {
   font-size: 20px;
-}
-
-#contentbox-middle {
-  position: relative;
 }
 
 /* Cirkulära bilder kopplade till boxar */
@@ -356,5 +355,22 @@ footer div h3 {
   text-align: center;
 }
 
+/* Dark Mode Toggle Button Style */
+#dark-mode-toggle {
+  background-color: var(--background-color-grey);
+  color: var(--black-text);
+  border: none;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+#dark-mode-toggle:hover {
+  background-color: var(--transparent-background);
+}
 
+#dark-mode .dark-mode-toggle:hover {
+  background-color: #3a3939;
+}

@@ -1,12 +1,12 @@
-// Samla alla jQuery funktioner så de körs när sidan är laddad
+// Samla alla jQuery funktioner så de aktiveras när sidan är laddad
 $(document).ready(function() {
   // Kontrollerar att jQuery är korrekt kopplat
   console.log('jQuery is activated');
   
   toggleElementOnClick("#self-description");
   changeStyleOnHover("#self-description");
-  performInitialAnimation("#contentbox-middle");
-  changeTextOnDoubleClick("#contentbox-middle", "#contentbox-middle .contentbox-text");
+  performInitialAnimation("#self-description");
+  addTooltipOnHover("#self-description");
   toggleDarkMode();  
 });
 
@@ -17,24 +17,22 @@ function toggleElementOnClick(selector) {
   });
 }
 
-// 2. Ändrar stilen på ett element när man hoverar på det
+// 2. Ändra stilen på ett element när man hoverar på det
 function changeStyleOnHover(selector) {
   $(selector).hover(function() {
     $(this).toggleClass("new-style");
   });
 }
 
-// 3. Animerar ett element att "floata" nedåt till höger och tillbaka vid page load
+// 3. Animera in element på skärmen när sidan laddas
 function performInitialAnimation(selector) {
-  
-  $(selector).animate({left: '100px', top: '100px'}, 1000)
-             .animate({left: '0px', top: '0px'}, 1000);
+  $(selector).animate({left: '0px'}, 2000); // 2000ms = 2s
 }
 
-// 4. Ändrar texten på ett element när det eller ett annat specificerat element dubbelklickas på
-function changeTextOnDoubleClick(triggerSelector, targetSelector) {
-  $(triggerSelector).dblclick(function() {
-    $(targetSelector).text("Du dubbelklickade på mig...nu ser jag ut såhär istället!");
+// 4. Addera en tooltip till ett element som hoveras på
+function addTooltipOnHover(triggerSelector) {
+  $(triggerSelector).hover(function() {
+    $(this).attr('title', 'Klicka på mig för att dölja mig!');
   });
 }
 
