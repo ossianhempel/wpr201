@@ -109,8 +109,8 @@ nav ul a {
   padding: 10px;
   line-height: 150%;
 
-  position: relative;
-  left: -1000px;
+  position: relative; /* Möjliggöra för elementet att animeras */ 
+  left: -1000px; /* Börja med negativ position för att animeras in i bild */
 }
 
 /* Huvudsektion */
@@ -331,7 +331,7 @@ footer div h3 {
 /* CSS för jQuery-metod */
 
 /* CSS för hover */
-#self-description.new-style {
+#self-description.hover-style {
   background-color: black;
 }
 

@@ -5,7 +5,7 @@ $(document).ready(function() {
   
   toggleElementOnClick("#self-description");
   changeStyleOnHover("#self-description");
-  performInitialAnimation("#self-description");
+  performAnimation("#self-description");
   addTooltipOnHover("#self-description");
   toggleDarkMode();  
 });
@@ -20,13 +20,13 @@ function toggleElementOnClick(selector) {
 // 2. Ändra stilen på ett element när man hoverar på det
 function changeStyleOnHover(selector) {
   $(selector).hover(function() {
-    $(this).toggleClass("new-style");
+    $(this).toggleClass("hover-style");
   });
 }
 
-// 3. Animera in element på skärmen när sidan laddas
-function performInitialAnimation(selector) {
-  $(selector).animate({left: '0px'}, 2000); // 2000ms = 2s
+// 3. Animera ett element när sidan laddas
+function performAnimation(selector) {
+  $(selector).animate({left: '0px'}, 2000); // 2 sekunder
 }
 
 // 4. Addera en tooltip till ett element som hoveras på
