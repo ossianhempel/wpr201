@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using wpr201_assignment2_asp.Models;
+using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 
 namespace wpr201_assignment2_asp.Controllers
@@ -13,6 +14,7 @@ namespace wpr201_assignment2_asp.Controllers
             _db = db;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
