@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Views\Pizza\" />
+    <None Remove="Views\PizzaCreation\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -25,5 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Pizza\" />
+    <Folder Include="Views\PizzaCreation\" />
   </ItemGroup>
 </Project>
