@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <None Remove="Views\Pizza\" />
-    <None Remove="Views\PizzaCreation\" />
+    <None Remove="Views\PizzaManagement\" />
+    <None Remove="Views\OrderManagement\" />
+    <None Remove="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -26,6 +28,13 @@
 
   <ItemGroup>
     <Folder Include="Views\Pizza\" />
-    <Folder Include="Views\PizzaCreation\" />
+    <Folder Include="Views\PizzaManagement\" />
+    <Folder Include="Views\OrderManagement\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Models\Index.cshtml" />
+    <Content Remove="Models\Index.cs" />
+  </ItemGroup>
+  
 </Project>

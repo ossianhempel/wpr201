@@ -1,0 +1,27 @@
+@model wpr201_assignment2_asp.Models.Pizza
+
+@{
+    ViewData["Title"] = "Lägg till pizza"; <!-- Titel för viewn -->
+}
+
+<h2>@ViewData["Title"]</h2>  
+<!-- Skapar ett formulär som publicerar datan till "Create"-action i den associerade controllern -->
+<form asp-action="Create" method="post">
+    <!-- Formulärgrupp för pizzans namn -->
+    <div class="form-group">
+        <label asp-for="Name">Pizzans namn</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <!-- Formulärgrupp för pizzans beskrivning -->
+    <div class="form-group">
+        <label asp-for="Description">Beskrivning</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <!-- Formulärgrupp för pizzans pris -->
+    <div class="form-group">
+        <label asp-for="Price">Pris (sek)</label>  
+        <input asp-for="Price" class="form-control" />  
+    </div>
+    <!-- Knapp för att skicka in formulär -->
+    <button type="submit" class="btn btn-primary">Spara pizza</button>
+</form>

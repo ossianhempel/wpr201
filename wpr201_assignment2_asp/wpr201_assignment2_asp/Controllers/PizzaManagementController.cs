@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace wpr201_assignment2_asp.Controllers
 {
-    public class PizzaCreationController : Controller
+    public class PizzaManagementController : Controller
     {
         private readonly PizzaDbContext _db;
 
-        public PizzaCreationController(PizzaDbContext db)
+        public PizzaManagementController(PizzaDbContext db)
         {
             _db = db;
         }

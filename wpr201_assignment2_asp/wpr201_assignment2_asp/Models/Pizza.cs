@@ -8,19 +8,20 @@ namespace wpr201_assignment2_asp.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } // Unique identifier for each pizza
+        public int Id { get; set; } // Unik identifierare för varje pizza
 
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; } // Name of the pizza
+        public string Name { get; set; } // Pizzans namn
 
         [Required]
-        public string Description { get; set; } // Description of the pizza
+        public string Description { get; set; } // Pizzans beskrivning
 
         [Required]
-        public double Price { get; set; } // Price of the pizza
+        public double Price { get; set; } // Pizzans pris
 
-        // Additional fields can go here, like image URLs, ingredients, etc.
+        public ICollection<Order> Orders { get; set; }
+
     }
 }
 

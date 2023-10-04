@@ -5,23 +5,21 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>Hello, World!</p>
 
     <!-- Displaying Pizzas -->
-    <h2>Pizzas</h2>
+    <h2>Pizzor</h2>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Pris (sek)</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Loopar igenom och visar pizzorna från Pizza controller -->
             @foreach (var pizza in Model)
             {
                 <tr>
