@@ -37,4 +37,10 @@
     <Content Remove="Models\Index.cs" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Compile Update="ViewModels\OrderViewModel.cs">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Compile>
+  </ItemGroup>
 </Project>

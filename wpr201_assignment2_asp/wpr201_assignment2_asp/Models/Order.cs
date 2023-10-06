@@ -14,6 +14,10 @@ namespace wpr201_assignment2_asp.Models
 
         public DateTime OrderDate { get; set; }
 
+        public string CustomerName { get; set; }
+
+        public string Address { get; set; }
+
         public int Quantity { get; set; }
 
         public Pizza Pizza { get; set; }

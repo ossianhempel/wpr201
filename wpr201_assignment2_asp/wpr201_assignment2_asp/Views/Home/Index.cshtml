@@ -5,7 +5,9 @@
 <div class="text-center">
     <h1 class="display-4">Välkommen till Lilla Sara Pizzeria!</h1>
     <p>ADRESS</p>
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
-    @*<p>@Html.ActionLink("View Pizzas", "Index", "Pizza")</p>*@
-</div>
 
+    <!-- CTA-knapp -->
+    <a asp-controller="OrderManagement" asp-action="Create" class="btn btn-primary">
+        Beställ nu!
+    </a>
+</div>

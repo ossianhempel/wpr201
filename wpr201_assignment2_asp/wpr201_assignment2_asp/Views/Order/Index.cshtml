@@ -1,0 +1,40 @@
+﻿@model IEnumerable<wpr201_assignment2_asp.Models.Order>
+
+@{
+    ViewData["Title"] = "View Orders";
+}
+
+<div class="text-center">
+
+    <!-- Displaying Orders -->
+    <h2>Placed Orders</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Pizza Id</th>
+                <th>Order Date</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Quantity</th>
+                <th>Pizza Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through and display the orders -->
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.PizzaId</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.Address</td>
+                    <td>@order.Quantity</td>
+                    <td>@order.Pizza?.Name</td> <!-- ?. is used for null-conditional access -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
