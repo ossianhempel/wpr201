@@ -20,7 +20,9 @@ namespace wpr201_assignment2_asp.Models
         [Required]
         public double Price { get; set; } // Pizzans pris
 
-        public ICollection<Order> Orders { get; set; }
+        //[NotMapped]
+        //public ICollection<Order> Orders { get; set; }
+
 
     }
 }

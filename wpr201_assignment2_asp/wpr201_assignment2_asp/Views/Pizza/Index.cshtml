@@ -16,10 +16,11 @@
                 <th>Namn</th>
                 <th>Beskrivning</th>
                 <th>Pris (sek)</th>
+                <th>Ändringar</th>
             </tr>
         </thead>
+        <!-- Existing table code -->
         <tbody>
-            <!-- Loopar igenom och visar pizzorna från Pizza controller -->
             @foreach (var pizza in Model)
             {
                 <tr>
@@ -27,8 +28,22 @@
                     <td>@pizza.Name</td>
                     <td>@pizza.Description</td>
                     <td>@pizza.Price</td>
+                    <td>
+                        <!-- Style the anchor tag like a button and wrap it in a form for Edit -->
+                        <form asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" method="get" style="display:inline;">
+                            <input type="submit" value="Redigera" />
+                        </form>
+
+                        |
+
+                        <!-- Style the anchor tag like a button and wrap it in a form for Delete -->
+                        <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" method="post" style="display:inline;">
+                            <input type="submit" value="Ta bort" />
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
+
     </table>
 </div>
