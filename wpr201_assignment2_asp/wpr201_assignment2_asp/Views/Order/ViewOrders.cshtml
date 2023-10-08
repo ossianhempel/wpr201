@@ -30,6 +30,11 @@
                 <td>@order.CustomerName</td>
                 <td>@order.Address</td>
                 <td>@order.Quantity</td>
+                <td>
+                    <form asp-action="DeleteOrder" asp-controller="Order" asp-route-id="@order.Id" method="post" style="display:inline;">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
             </tr>
             }
         </tbody>

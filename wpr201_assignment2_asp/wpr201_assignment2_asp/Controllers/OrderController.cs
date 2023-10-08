@@ -80,5 +80,21 @@ namespace wpr201_assignment2_asp.Controllers
             var orders = _db.Orders.Include(o => o.Pizza).ToList();
             return View(orders);
         }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = _db.Orders.FirstOrDefault(o => o.Id == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _db.Orders.Remove(order);
+            _db.SaveChanges();
+            return RedirectToAction("ViewOrders");
+        }
+
     }
 }

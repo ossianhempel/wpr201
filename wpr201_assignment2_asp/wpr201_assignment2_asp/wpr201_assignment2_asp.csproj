@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <None Remove="Views\Pizza\" />
-    <None Remove="Views\PizzaManagement\" />
-    <None Remove="Views\OrderManagement\" />
     <None Remove="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
@@ -28,8 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Pizza\" />
-    <Folder Include="Views\PizzaManagement\" />
-    <Folder Include="Views\OrderManagement\" />
     <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
