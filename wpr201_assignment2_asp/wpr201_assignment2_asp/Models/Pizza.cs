@@ -20,8 +20,11 @@ namespace wpr201_assignment2_asp.Models
         [Required]
         public double Price { get; set; } // Pizzans pris
 
-        //[NotMapped]
-        //public ICollection<Order> Orders { get; set; }
+        public byte[]? Image { get; set; }
+
+        [NotMapped]
+        public IFormFile UploadedImage { get; set; }
+
 
 
     }

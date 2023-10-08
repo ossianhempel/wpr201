@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using wpr201_assignment2_asp.Models;
+using System;
+using System.IO;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace wpr201_assignment2_asp.Controllers
 {
-    // PizzaController ärver från "grundklassen" Controller från ASP.NET MVC
     public class PizzaController : Controller
     {
-        // Readonly-fält från PizzaDbContext då vi endast vill läsa data 
         private readonly PizzaDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        // Konstruktorns får PizzaDbContexts funktion genom dependency injection
-        public PizzaController(PizzaDbContext db)
+        public PizzaController(PizzaDbContext db, IWebHostEnvironment webHostEnvironment)
         {
-            _db = db; // Initialiserar databasen
+            _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Authorize]
@@ -26,33 +27,13 @@ namespace wpr201_assignment2_asp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Create(Pizza pizza)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Pizzas.Add(pizza);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            // Add this line to debug
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
-            foreach (var error in errors)
-            {
-                Console.WriteLine(error.ErrorMessage);
-            }
-            return View(pizza);
-        }
-
-
-        // Action som hämtar pizzorna från databasen med en GET-request
+        // View pizzas
         public IActionResult Index()
         {
             var pizzas = _db.Pizzas.ToList();
-
             return View(pizzas);
         }
-        // GET: Pizza/Edit/5
+
         public IActionResult Edit(int id)
         {
             var pizza = _db.Pizzas.Find(id);
@@ -63,26 +44,93 @@ namespace wpr201_assignment2_asp.Controllers
             return View(pizza);
         }
 
-        // POST: Pizza/Edit/5
+
+        // CREATE
+        [HttpPost]
+        public async Task<IActionResult> Create(Pizza pizza)
+        {
+            ModelState.Remove("UploadedImage"); 
+
+            if (ModelState.IsValid)
+            {
+                if (pizza.UploadedImage != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await pizza.UploadedImage.CopyToAsync(memoryStream);
+                        pizza.Image = memoryStream.ToArray();
+                    }
+                }
+
+                _db.Pizzas.Add(pizza);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(pizza);
+        }
+
+        // EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Pizza pizza)
+        public async Task<IActionResult> Edit(int id, Pizza newPizza)
         {
-            if (id != pizza.Id)
+            ModelState.Remove("UploadedImage"); 
+
+            if (id != newPizza.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _db.Update(pizza);
-                _db.SaveChanges();
+                try
+                {
+                    // Fetch the existing pizza
+                    var existingPizza = _db.Pizzas.AsNoTracking().FirstOrDefault(p => p.Id == id);
+                    if (existingPizza == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // If a new image is not uploaded, retain the existing image
+                    if (newPizza.UploadedImage == null)
+                    {
+                        newPizza.Image = existingPizza.Image;
+                    }
+                    else
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await newPizza.UploadedImage.CopyToAsync(memoryStream);
+                            newPizza.Image = memoryStream.ToArray();
+                        }
+                    }
+
+                    _db.Update(newPizza);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_db.Pizzas.Any(e => e.Id == newPizza.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pizza);
+            return View(newPizza);
         }
 
-        // POST: Pizza/Delete/5
+
+
+
+
+        // DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -95,10 +143,7 @@ namespace wpr201_assignment2_asp.Controllers
 
             _db.Pizzas.Remove(pizza);
             _db.SaveChanges();
-
             return RedirectToAction("Index");
         }
-
     }
-
 }

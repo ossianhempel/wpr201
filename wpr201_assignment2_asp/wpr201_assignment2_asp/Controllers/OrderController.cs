@@ -18,7 +18,6 @@ namespace wpr201_assignment2_asp.Controllers
             _db = db;
         }
 
-        [Authorize]
         public IActionResult Create(int? pizzaId)
         {
             // When a pizza ID is provided
@@ -54,12 +53,6 @@ namespace wpr201_assignment2_asp.Controllers
             ViewBag.Pizzas = _db.Pizzas.ToList();
             return View();
         }
-
-        //public IActionResult Create()
-        //{
-        //    ViewBag.Pizzas = _db.Pizzas.ToList();
-        //    return View();
-        //}
 
         [HttpPost]
         public IActionResult PlaceOrder(Order order)
