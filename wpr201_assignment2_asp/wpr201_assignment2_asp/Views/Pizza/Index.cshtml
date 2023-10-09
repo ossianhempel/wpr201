@@ -6,25 +6,28 @@
 
 <div class="text-center">
 
-    <!-- Displaying Pizzas -->
-    <h2>Pizzor</h2>
+    <h2>Meny</h2>
 
+    <!-- Visar pizzorna på menyn -->
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Namn</th>
                 <th>Beskrivning</th>
                 <th>Pris (sek)</th>
-                <th>Redigera</th>
+                <th>Bild</th>
+                <!-- Visa table header "Redigera" om användaren är inloggad -->
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <th>Redigera</th>
+                }
             </tr>
         </thead>
-        <!-- Existing table code -->
+
         <tbody>
             @foreach (var pizza in Model)
             {
                 <tr>
-                    <td>@pizza.Id</td>
                     <td>@pizza.Name</td>
                     <td>@pizza.Description</td>
                     <td>@pizza.Price</td>
@@ -40,22 +43,23 @@
                     </td>
 
                     <td>
+                        <!-- Visa knapparna för att redigera pizzorna om användaren är inloggad -->
                         @if (User.Identity.IsAuthenticated)
                         {
                             <!-- Style the anchor tag like a button and wrap it in a form for Edit -->
-                            <form asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" method="get" style="display:inline;">
-                                <input type="submit" value="Ändra" />
+                            <form asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" method="get" style="display: inline;">
+                                <input type="submit" value="Ändra" class="btn btn-primary" />
                             </form>
                             <span style="display:inline;">|</span>
                             <!-- Style the anchor tag like a button and wrap it in a form for Delete -->
-                            <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" method="post" style="display:inline;">
-                                <input type="submit" value="Ta bort" />
+                            <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" method="post" style="display: inline;">
+                                <input type="submit" value="Ta bort" class="btn btn-primary" />
                             </form>
                         }
 
                     </td>
                 </tr>
-                }
+            }
         </tbody>
 
     </table>
