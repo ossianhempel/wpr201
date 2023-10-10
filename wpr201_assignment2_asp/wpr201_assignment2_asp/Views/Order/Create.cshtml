@@ -1,28 +1,39 @@
 ﻿@model wpr201_assignment2_asp.Models.Order
 @{
-    ViewData["Title"] = "Order Management";
+    ViewData["Title"] = "Order Management"; // Titel på sidan
 }
 
 <h1>@ViewData["Title"]</h1>
 
+<!-- Formulär för att lägga en order -->
 <form asp-action="PlaceOrder" method="post">
+
+    <!-- Fält för namn -->
     <div class="form-group">
-        <label asp-for="CustomerName">Customer Name</label>
+        <label asp-for="CustomerName">Namn</label>
         <input asp-for="CustomerName" class="form-control" />
     </div>
+
+    <!-- Fält för adress -->
     <div class="form-group">
-        <label asp-for="Address">Delivery Address</label>
+        <label asp-for="Address">Leveransadress</label>
         <input asp-for="Address" class="form-control" />
     </div>
+
+    <!-- Dropdownmeny för att välja pizza -->
     <div class="form-group">
-        <label asp-for="PizzaId">Select Pizza</label>
+        <label style="margin-bottom: 20px; margin-top: 20px; margin-right: 5px;" asp-for="PizzaId">Välj pizza</label>
         <select asp-for="PizzaId" asp-items="@(new SelectList(ViewBag.Pizzas, "Id", "Name"))">
-            <option>Select</option>
+            <option>Välj</option> 
         </select>
     </div>
+
+    <!-- Fält för att ange antal pizzor -->
     <div class="form-group">
-        <label asp-for="Quantity">Quantity</label>
+        <label asp-for="Quantity">Antal</label>
         <input asp-for="Quantity" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Place Order</button>
+
+    <!-- Beställningsknapp -->
+    <button type="submit" style="margin-top: 20px;" class="btn btn-primary">Beställ nu</button>
 </form>

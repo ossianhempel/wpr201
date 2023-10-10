@@ -1,30 +1,36 @@
 ﻿@model wpr201_assignment2_asp.Models.Pizza
 
 @{
-    ViewData["Title"] = "Ändra pizzan";
+    ViewData["Title"] = "Ändra pizzan"; 
 }
+
 
 <h1>Edit Pizza</h1>
 
-<!-- Use the model's ID for the action and set the method to "post" -->
+<!-- Använd modellens ID och sätt metoden till "post" -->
 <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+
+    <!-- Gömt fält för att spara pizzans ID -->
     <input type="hidden" asp-for="Id" />
 
+    <!-- Fält för namn -->
     <div class="form-group">
         <label asp-for="Name">Pizzans namn</label>
         <input asp-for="Name" class="form-control" />
     </div>
 
+    <!-- Fält för beskrivning -->
     <div class="form-group">
         <label asp-for="Description">Beskrivning</label>
         <input asp-for="Description" class="form-control" />
     </div>
 
+    <!-- Fält för pris -->
     <div class="form-group">
         <label asp-for="Price">Pris (sek)</label>
         <input asp-for="Price" class="form-control" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <!-- Knapp för att spara ändringarna -->
+    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Spara ändringar</button>
 </form>
-

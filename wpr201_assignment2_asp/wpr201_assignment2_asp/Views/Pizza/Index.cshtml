@@ -46,12 +46,13 @@
                         <!-- Visa knapparna för att redigera pizzorna om användaren är inloggad -->
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <!-- Style the anchor tag like a button and wrap it in a form for Edit -->
+                            <!-- Formulär/knapp för att ändra -->
                             <form asp-action="Edit" asp-controller="Pizza" asp-route-id="@pizza.Id" method="get" style="display: inline;">
                                 <input type="submit" value="Ändra" />
                             </form>
                             <span style="display:inline;">|</span>
-                            <!-- Style the anchor tag like a button and wrap it in a form for Delete -->
+
+                            <!-- Formulär/knapp för att ta bort -->
                             <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" method="post" style="display: inline;">
                                 <input type="submit" value="Ta bort" />
                             </form>

@@ -1,12 +1,12 @@
 @model wpr201_assignment2_asp.Models.Pizza
 
 @{
-    ViewData["Title"] = "Lägg till pizza"; <!-- Titel för viewn -->
+    ViewData["Title"] = "Lägg till pizza"; 
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<!-- Skapar ett formulär som publicerar datan till "Create"-action i den associerade controllern -->
+<!-- Skapar ett formulär som skickar datan till "Create"-action i den kopplade controllern -->
 <form asp-action="Create" method="post" enctype="multipart/form-data">
 
     <!-- Formulärgrupp för pizzans namn -->
@@ -29,10 +29,11 @@
 
     <!-- Formulärgrupp för att addera bild -->
     <div class="form-group">
-        <label for="Uploadedimage">Image</label>
+        <label for="Uploadedimage">Bild</label>
         <input type="file" name="Uploadedimage" class="form-control">
     </div>
 
     <!-- Knapp för att skicka in formulär -->
-    <button type="submit" class="btn btn-primary">Spara pizza</button>
+    <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Spara pizza</button>
+
 </form>

@@ -20,10 +20,10 @@ namespace wpr201_assignment2_asp.Models
         [Required]
         public double Price { get; set; } // Pizzans pris
 
-        public byte[]? Image { get; set; }
+        public byte[]? Image { get; set; } // Bilden lagrad som byte-array, valfri
 
         [NotMapped]
-        public IFormFile UploadedImage { get; set; }
+        public IFormFile UploadedImage { get; set; } // Representerar en fil som skickas genom HTTP
 
 
 

@@ -7,33 +7,38 @@ using System;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace wpr201_assignment2_asp.Controllers
 {
     public class PizzaController : Controller
     {
+        // Instanser av databaskontext och webbhost
         private readonly PizzaDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        // Konstruktor för PizzaController
         public PizzaController(PizzaDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
         }
 
+        // Visa vyn för att skapa en pizza (kräver inloggning)
         [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // View pizzas
+        // Visa alla pizzor
         public IActionResult Index()
         {
             var pizzas = _db.Pizzas.ToList();
             return View(pizzas);
         }
 
+        // Visa vyn för att redigera pizza
         public IActionResult Edit(int id)
         {
             var pizza = _db.Pizzas.Find(id);
@@ -44,12 +49,11 @@ namespace wpr201_assignment2_asp.Controllers
             return View(pizza);
         }
 
-
-        // CREATE
+        // POST-metod för att skapa en pizza
         [HttpPost]
         public async Task<IActionResult> Create(Pizza pizza)
         {
-            ModelState.Remove("UploadedImage"); 
+            ModelState.Remove("UploadedImage"); // Kräv ej bild
 
             if (ModelState.IsValid)
             {
@@ -70,13 +74,14 @@ namespace wpr201_assignment2_asp.Controllers
             return View(pizza);
         }
 
-        // EDIT
+        // POST-metod för att redigera en pizza
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Pizza newPizza)
         {
-            ModelState.Remove("UploadedImage"); 
+            ModelState.Remove("UploadedImage"); // Kräv ej bild
 
+            // Kontrollera att IDt finns
             if (id != newPizza.Id)
             {
                 return NotFound();
@@ -86,30 +91,24 @@ namespace wpr201_assignment2_asp.Controllers
             {
                 try
                 {
-                    // Fetch the existing pizza
+                    // Hämta den existerande pizzan som matchar det angivna IDt
+                    // AsNoTracking() gör att Entity Framework inte spårar objektet för ändringar (snabbare, mindre 
                     var existingPizza = _db.Pizzas.AsNoTracking().FirstOrDefault(p => p.Id == id);
                     if (existingPizza == null)
                     {
                         return NotFound();
                     }
 
-                    // If a new image is not uploaded, retain the existing image
-                    if (newPizza.UploadedImage == null)
-                    {
-                        newPizza.Image = existingPizza.Image;
-                    }
-                    else
-                    {
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await newPizza.UploadedImage.CopyToAsync(memoryStream);
-                            newPizza.Image = memoryStream.ToArray();
-                        }
-                    }
+                    // Använd existerande bild fortsatt
+                    newPizza.Image = existingPizza.Image;
 
+                    // Uppdatera pizzan i databasen
                     _db.Update(newPizza);
+
                     await _db.SaveChangesAsync();
                 }
+
+                // Vid fel, kolla om pizzan finns i databasen
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!_db.Pizzas.Any(e => e.Id == newPizza.Id))
@@ -121,16 +120,17 @@ namespace wpr201_assignment2_asp.Controllers
                         throw;
                     }
                 }
+
+                // Dirigerar användaren tillbaka till menyn
                 return RedirectToAction(nameof(Index));
             }
+
+            // Fortsätt redigera
             return View(newPizza);
         }
 
 
-
-
-
-        // DELETE
+        // POST-metod för att radera en pizza
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
