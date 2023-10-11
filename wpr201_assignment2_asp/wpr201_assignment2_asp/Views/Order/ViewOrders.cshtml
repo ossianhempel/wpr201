@@ -18,7 +18,7 @@
                 <th>Datum</th> 
                 <th>Name</th> 
                 <th>Adress</th> 
-                <th>Antal</th> /
+                <th>Antal</th> 
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
             @foreach (var order in Model)
             {
                 <tr>
-                    <td>@order.Id</td> // Beställnings-ID
+                    <td>@order.Id</td> 
                     <td>@order.Pizza.Name</td> 
                     <td>@order.OrderDate</td> 
                     <td>@order.CustomerName</td> 
@@ -37,7 +37,7 @@
                     <!-- Formulär för att radera beställning -->
                     <td>
                         <form asp-action="DeleteOrder" asp-controller="Order" asp-route-id="@order.Id" method="post" style="display:inline;">
-                            <input type="submit" value="Delete" /> 
+                            <input type="submit" value="Ta bort" /> 
                         </form>
                     </td>
                 </tr>
